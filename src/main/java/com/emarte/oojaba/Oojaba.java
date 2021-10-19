@@ -42,6 +42,10 @@ public class Oojaba {
                     case VK_V: canvasPanel.setViewerMouseMode(); break;
                     case VK_D: canvasPanel.setEditorMouseMode(); break;
                     case VK_A: canvasPanel.setPainterMouseMode(); break;
+                    case VK_W: canvasPanel.makeWider(300); break;
+                    case VK_H: canvasPanel.makeTaller(300); break;
+                    case VK_G: canvasPanel.setShowGrid(!canvasPanel.getShowGrid()); break;
+                    case VK_O: canvasPanel.setShowConnectionsOutwards(!canvasPanel.getShowConnectionsOutwards()); break;
                     case VK_L:
                         if(new File(FileUtils.FILENAME_READ).exists()) {
                             if (JOptionPane.showConfirmDialog(window, "Load from disk ?", "Load ?", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE) == JOptionPane.OK_OPTION) {

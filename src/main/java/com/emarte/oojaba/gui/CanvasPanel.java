@@ -18,9 +18,10 @@ import static java.awt.Color.white;
 public class CanvasPanel extends JComponent {
 
     private final Dimension canvasSize;
+    private final CanvasChangeListener canvasChangeListener;
     private Font font;
 
-    private List<MouseMode> mouseModes = new ArrayList<>();
+    private final List<MouseMode> mouseModes = new ArrayList<>();
     private MouseMode currentMouseMode;
     private final List<MouseModeChangeListener> mouseModeListeners = new ArrayList<>();
     private boolean showGrid = true;
@@ -34,8 +35,9 @@ public class CanvasPanel extends JComponent {
     private boolean highlightUsedEndPoints;
     private Color selectedColor = new Color(255, 154, 28);
 
-    CanvasPanel(Dimension startingSize) {
+    CanvasPanel(Dimension startingSize, CanvasChangeListener canvasChangeListener) {
         this.canvasSize = startingSize;
+        this.canvasChangeListener = canvasChangeListener;
         mouseModes.add(new PointerMouseMode(this));
         mouseModes.add(new EraserMouseMode(this));
         mouseModes.add(new ConnectMouseMode(this));
@@ -194,9 +196,14 @@ public class CanvasPanel extends JComponent {
         mouseModeListeners.forEach(listenerList -> listenerList.mouseModeChanged(currentMouseMode));
     }
 
-    public void showGrid(boolean showGrid) {
+    public boolean getShowGrid() {
+        return showGrid;
+    }
+
+    public void setShowGrid(boolean showGrid) {
         this.showGrid = showGrid;
         repaint();
+        canvasChangeListener.showGrid(showGrid);
     }
 
     public void showEndPoints(boolean showEndPoints) {
@@ -287,8 +294,13 @@ public class CanvasPanel extends JComponent {
         return selectedColor;
     }
 
-    public void showConnectionsOutwards(boolean showConnectionsOutwards) {
+    public boolean getShowConnectionsOutwards() {
+        return showConnectionsOutwards;
+    }
+
+    public void setShowConnectionsOutwards(boolean showConnectionsOutwards) {
         this.showConnectionsOutwards = showConnectionsOutwards;
+        canvasChangeListener.showConnectionsOutwardsChanged(showConnectionsOutwards);
     }
 
     public void highlightUsedEndPoints(boolean highlightUsedEndPoints) {

@@ -10,13 +10,15 @@ import java.io.File;
 import static com.emarte.oojaba.data.Entity.EntityType.SERVICE;
 import static com.emarte.oojaba.gui.PaintMouseMode.COLOR_CHOOSER;
 
-public class DisplayWindow extends JFrame {
+public class DisplayWindow extends JFrame implements CanvasChangeListener {
     private final CanvasPanel canvasPanel;
+    JCheckBoxMenuItem showGridMenuItem;
+    private final JCheckBoxMenuItem showConnectionsOutwardsItem;
 
     public DisplayWindow() {
         super("Oojaba");
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        canvasPanel = new CanvasPanel(screenSize);
+        canvasPanel = new CanvasPanel(screenSize, this);
 
         JMenuBar menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
@@ -52,7 +54,7 @@ public class DisplayWindow extends JFrame {
 
         JMenu canvasMenu = new JMenu("Canvas");
 
-        JMenuItem widerMenuItem = new JMenuItem("Increase Width");
+        JMenuItem widerMenuItem = new JMenuItem("W - Increase Width");
         widerMenuItem.addActionListener(e -> {
             canvasPanel.makeWider(300);
             repaint();
@@ -61,7 +63,7 @@ public class DisplayWindow extends JFrame {
         widerMenuItem.setToolTipText("Make drawing area wider");
         canvasMenu.add(widerMenuItem);
 
-        JMenuItem tallerMenuItem = new JMenuItem("Increase Height");
+        JMenuItem tallerMenuItem = new JMenuItem("H - Increase Height");
         tallerMenuItem.addActionListener(e -> {
             canvasPanel.makeTaller(300);
             repaint();
@@ -70,9 +72,9 @@ public class DisplayWindow extends JFrame {
         tallerMenuItem.setToolTipText("Make drawing area taller");
         canvasMenu.add(tallerMenuItem);
 
-        JCheckBoxMenuItem showGridMenuItem = new JCheckBoxMenuItem("Show Grid", true);
+        showGridMenuItem = new JCheckBoxMenuItem("G - Show Grid", true);
         showGridMenuItem.addChangeListener(e -> {
-            canvasPanel.showGrid(showGridMenuItem.isSelected());
+            canvasPanel.setShowGrid(showGridMenuItem.isSelected());
             repaint();
         });
 
@@ -100,9 +102,9 @@ public class DisplayWindow extends JFrame {
         increaseTextSize.setToolTipText("Make drawing text larger");
         canvasMenu.add(increaseTextSize);
 
-        JCheckBoxMenuItem showConnectionsOutwardsItem = new JCheckBoxMenuItem("Show Connections Outwards", true);
+        showConnectionsOutwardsItem = new JCheckBoxMenuItem("O -Show Connections Outwards", true);
         showConnectionsOutwardsItem.addChangeListener(e -> {
-            canvasPanel.showConnectionsOutwards(showConnectionsOutwardsItem.isSelected());
+            canvasPanel.setShowConnectionsOutwards(showConnectionsOutwardsItem.isSelected());
             repaint();
         });
 
@@ -194,5 +196,15 @@ public class DisplayWindow extends JFrame {
 
     public CanvasPanel getCanvasPanel() {
         return canvasPanel;
+    }
+
+    @Override
+    public void showGrid(boolean showGrid) {
+        showGridMenuItem.setSelected(showGrid);
+    }
+
+    @Override
+    public void showConnectionsOutwardsChanged(boolean showConnectionsOutwards) {
+        showConnectionsOutwardsItem.setSelected(showConnectionsOutwards);
     }
 }
