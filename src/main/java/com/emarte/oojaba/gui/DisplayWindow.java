@@ -26,7 +26,7 @@ public class DisplayWindow extends JFrame implements CanvasChangeListener {
         JMenuItem loadItem = new JMenuItem("L - Load");
         loadItem.addActionListener(e -> {
             if (new File(FileUtils.FILENAME_READ).exists()) {
-                if (JOptionPane.showConfirmDialog(canvasPanel, "Load from disk ?", "Load ?", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE) == JOptionPane.OK_OPTION) {
+                if (JOptionPane.showConfirmDialog(canvasPanel, "Load from disk ?", "Load entities.json ?", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE) == JOptionPane.OK_OPTION) {
                     FileUtils.load(canvasPanel);
                     canvasPanel.repaint();
                 }
@@ -41,7 +41,7 @@ public class DisplayWindow extends JFrame implements CanvasChangeListener {
         JMenuItem saveItem = new JMenuItem("S - Save");
         saveItem.addActionListener(e -> {
             if(EntitySprite.getEntitySprites().size() > 0) {
-                if (JOptionPane.showConfirmDialog(canvasPanel, "Save to disk ?", "Save ?", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE) == JOptionPane.OK_OPTION) {
+                if (JOptionPane.showConfirmDialog(canvasPanel, "Save to disk ?", "Save entities.json ?", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE) == JOptionPane.OK_OPTION) {
                     FileUtils.save(canvasPanel);
                 }
             } else {

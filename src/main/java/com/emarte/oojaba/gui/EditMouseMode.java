@@ -42,7 +42,7 @@ class EditMouseMode extends MouseMode {
 
                     EndPoint endPoint = sprite.getEntity().getEndPoints().get(index);
                     EndPointType endPointType = endPoint.getType();
-                    String newText = (String) JOptionPane.showInputDialog(canvasPanel, "Edit endpoint attributes - " + endPointType.getExplanationText(), "Edit  " + endPointType.name() + " EndPoint", JOptionPane.INFORMATION_MESSAGE, null, null, endPoint.getAttributeText());
+                    String newText = (String) JOptionPane.showInputDialog(canvasPanel, "Edit endpoint attributes - " + endPointType.getExplanationText(), "Edit " + endPointType.name() + " EndPoint", JOptionPane.INFORMATION_MESSAGE, null, null, endPoint.getAttributeText());
 
                     if(newText != null) {
                         endPoint.applyAttributeText(newText);

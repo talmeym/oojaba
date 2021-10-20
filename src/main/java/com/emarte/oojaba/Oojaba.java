@@ -21,7 +21,7 @@ public class Oojaba {
             @Override
             public void windowClosing(WindowEvent e) {
                 if(EntitySprite.getEntitySprites().size() > 0) {
-                    if(JOptionPane.showConfirmDialog(window, "Save to disk before exiting ?", "Save before exit ?", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE) == JOptionPane.OK_OPTION) {
+                    if(JOptionPane.showConfirmDialog(window, "Save to disk before exiting ?", "Save entities.json ?", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE) == JOptionPane.OK_OPTION) {
                         FileUtils.save(window.getCanvasPanel());
                     }
                 }
@@ -48,7 +48,7 @@ public class Oojaba {
                     case VK_O: canvasPanel.setShowConnectionsOutwards(!canvasPanel.getShowConnectionsOutwards()); break;
                     case VK_L:
                         if(new File(FileUtils.FILENAME_READ).exists()) {
-                            if (JOptionPane.showConfirmDialog(window, "Load from disk ?", "Load ?", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE) == JOptionPane.OK_OPTION) {
+                            if (JOptionPane.showConfirmDialog(window, "Load from disk ?", "Load entities.json ?", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE) == JOptionPane.OK_OPTION) {
                                 FileUtils.load(canvasPanel);
                             }
                         } else {
@@ -57,7 +57,7 @@ public class Oojaba {
                         break;
                     case VK_S:
                         if(EntitySprite.getEntitySprites().size() > 0) {
-                            if (JOptionPane.showConfirmDialog(window, "Save to disk ?", "Save ?", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE) == JOptionPane.OK_OPTION) {
+                            if (JOptionPane.showConfirmDialog(window, "Save to disk ?", "Save entities.json ?", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE) == JOptionPane.OK_OPTION) {
                                 FileUtils.save(canvasPanel);
                             }
                         } else {

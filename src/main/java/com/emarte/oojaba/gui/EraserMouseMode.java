@@ -13,9 +13,9 @@ import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
 
 class EraserMouseMode extends MouseMode {
-    private CanvasPanel canvasPanel;
+    private final CanvasPanel canvasPanel;
 
-    private MouseListener mouseListener = new MouseAdapter() {
+    private final MouseListener mouseListener = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
             List<InteractionSprite> interactionSprites = InteractionSprite.getInteractionSprites();
@@ -80,7 +80,7 @@ class EraserMouseMode extends MouseMode {
         }
     };
 
-    private MouseMotionListener mouseMotionListener = new MouseMotionAdapter() {
+    private final MouseMotionListener mouseMotionListener = new MouseMotionAdapter() {
         @Override
         public void mouseDragged(MouseEvent e) {
             // do nothing

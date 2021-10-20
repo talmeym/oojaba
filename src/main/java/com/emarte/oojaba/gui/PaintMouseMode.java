@@ -10,9 +10,9 @@ import static java.awt.Color.white;
 
 class PaintMouseMode extends MouseMode {
     public static JColorChooser COLOR_CHOOSER = new JColorChooser();
-    private CanvasPanel canvasPanel;
+    private final CanvasPanel canvasPanel;
 
-    private MouseListener mouseListener = new MouseAdapter() {
+    private final MouseListener mouseListener = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
             List<EntitySprite> entitySprites = EntitySprite.getEntitySprites();
@@ -49,7 +49,7 @@ class PaintMouseMode extends MouseMode {
         }
     };
 
-    private MouseMotionListener mouseMotionListener = new MouseMotionAdapter() {
+    private final MouseMotionListener mouseMotionListener = new MouseMotionAdapter() {
         @Override
         public void mouseDragged(MouseEvent e) {
             // do nothing

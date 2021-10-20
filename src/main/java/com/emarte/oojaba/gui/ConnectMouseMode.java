@@ -22,7 +22,7 @@ public class ConnectMouseMode extends MouseMode {
 
     private EndPoint actorEndPoint;
 
-    private MouseListener mouseListener = new MouseAdapter() {
+    private final MouseListener mouseListener = new MouseAdapter() {
 
         @Override
         public void mouseClicked(MouseEvent e) {
@@ -122,7 +122,7 @@ public class ConnectMouseMode extends MouseMode {
         }
     };
 
-    private MouseMotionListener mouseMotionListener = new MouseAdapter() {
+    private final MouseMotionListener mouseMotionListener = new MouseAdapter() {
         @Override
         public void mouseMoved(MouseEvent e) {
             List<EntitySprite> entitySprites = EntitySprite.getEntitySprites();

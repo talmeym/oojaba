@@ -15,7 +15,7 @@ public class ViewMouseMode extends MouseMode {
     private Entity actorEntity;
     private EndPoint actorEndPoint;
 
-    private MouseListener mouseListener = new MouseAdapter() {
+    private final MouseListener mouseListener = new MouseAdapter() {
 
         @Override
         public void mouseClicked(MouseEvent e) {
@@ -79,7 +79,7 @@ public class ViewMouseMode extends MouseMode {
         }
     };
 
-    private MouseMotionListener mouseMotionListener = new MouseAdapter() {
+    private final MouseMotionListener mouseMotionListener = new MouseAdapter() {
         @Override
         public void mouseMoved(MouseEvent e) {
             List<EntitySprite> entitySprites = EntitySprite.getEntitySprites();

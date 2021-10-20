@@ -7,7 +7,7 @@ import java.awt.event.*;
 import java.util.List;
 
 class PointerMouseMode extends MouseMode {
-    private CanvasPanel canvasPanel;
+    private final CanvasPanel canvasPanel;
 
     private EntitySprite entityToMove;
     private Dimension entityClickOffset;
@@ -16,7 +16,7 @@ class PointerMouseMode extends MouseMode {
     private EndPoint endPointToMove;
     private int endPointIndex;
 
-    private MouseListener mouseListener = new MouseAdapter() {
+    private final MouseListener mouseListener = new MouseAdapter() {
         @Override
         public void mousePressed(MouseEvent e) {
             entityToMove = null;
@@ -79,7 +79,7 @@ class PointerMouseMode extends MouseMode {
         }
     };
 
-    private MouseMotionListener mouseMotionListener = new MouseMotionAdapter() {
+    private final MouseMotionListener mouseMotionListener = new MouseMotionAdapter() {
         @Override
         public void mouseMoved(MouseEvent e) {
             List<EntitySprite> entitySprites = EntitySprite.getEntitySprites();
