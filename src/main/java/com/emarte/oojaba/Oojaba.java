@@ -46,6 +46,7 @@ public class Oojaba {
                     case VK_H: canvasPanel.makeTaller(300); break;
                     case VK_G: canvasPanel.setShowGrid(!canvasPanel.getShowGrid()); break;
                     case VK_O: canvasPanel.setShowConnectionsOutwards(!canvasPanel.getShowConnectionsOutwards()); break;
+                    case VK_U: canvasPanel.setShowUsedEndPoints(!canvasPanel.getShowUsedEndPoints()); break;
                     case VK_L:
                         if(new File(FileUtils.FILENAME_READ).exists()) {
                             if (JOptionPane.showConfirmDialog(window, "Load from disk ?", "Load entities.json ?", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE) == JOptionPane.OK_OPTION) {

@@ -14,6 +14,7 @@ public class DisplayWindow extends JFrame implements CanvasChangeListener {
     private final CanvasPanel canvasPanel;
     JCheckBoxMenuItem showGridMenuItem;
     private final JCheckBoxMenuItem showConnectionsOutwardsItem;
+    private final JCheckBoxMenuItem showUsedEndPointsItem;
 
     public DisplayWindow() {
         super("Oojaba");
@@ -111,14 +112,14 @@ public class DisplayWindow extends JFrame implements CanvasChangeListener {
         showConnectionsOutwardsItem.setToolTipText("Make drawing show connections made from the selected entity / endpoint outwards");
         canvasMenu.add(showConnectionsOutwardsItem);
 
-        JCheckBoxMenuItem highlightUsedEndPointsItem = new JCheckBoxMenuItem("Highlight Used End Points", false);
-        highlightUsedEndPointsItem.addChangeListener(e -> {
-            canvasPanel.highlightUsedEndPoints(highlightUsedEndPointsItem.isSelected());
+        showUsedEndPointsItem = new JCheckBoxMenuItem("U - Show Used End Points", false);
+        showUsedEndPointsItem.addChangeListener(e -> {
+            canvasPanel.setShowUsedEndPoints(showUsedEndPointsItem.isSelected());
             repaint();
         });
 
-        highlightUsedEndPointsItem.setToolTipText("Make drawing highlight end points that have involved in service connections");
-        canvasMenu.add(highlightUsedEndPointsItem);
+        showUsedEndPointsItem.setToolTipText("Make drawing show which end points that have involved in service connections");
+        canvasMenu.add(showUsedEndPointsItem);
 
         JMenuItem decreaseTextSizeItem = new JMenuItem("Decrease Text Size");
         decreaseTextSizeItem.addActionListener(e -> {
@@ -199,12 +200,17 @@ public class DisplayWindow extends JFrame implements CanvasChangeListener {
     }
 
     @Override
-    public void showGrid(boolean showGrid) {
-        showGridMenuItem.setSelected(showGrid);
+    public void showGrid(boolean show) {
+        showGridMenuItem.setSelected(show);
     }
 
     @Override
-    public void showConnectionsOutwardsChanged(boolean showConnectionsOutwards) {
-        showConnectionsOutwardsItem.setSelected(showConnectionsOutwards);
+    public void showConnectionsOutwardsChanged(boolean show) {
+        showConnectionsOutwardsItem.setSelected(show);
+    }
+
+    @Override
+    public void showUsedEndPoints(boolean show) {
+        showUsedEndPointsItem.setSelected(show);
     }
 }

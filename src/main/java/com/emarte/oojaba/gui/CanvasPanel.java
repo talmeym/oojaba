@@ -32,7 +32,7 @@ public class CanvasPanel extends JComponent {
     private boolean showElbows;
     private boolean showPossibleElbows;
     private boolean showConnectionsOutwards = true;
-    private boolean highlightUsedEndPoints;
+    private boolean showUsedEndPoints;
     private Color selectedColor = new Color(255, 154, 28);
 
     CanvasPanel(Dimension startingSize, CanvasChangeListener canvasChangeListener) {
@@ -77,7 +77,7 @@ public class CanvasPanel extends JComponent {
         g.setColor(black);
 
         for (EntitySprite entitySprite : entitySprites) {
-            entitySprite.paint(g, showEndPoints, showAddEndPoint, showRemoveEntity, selectedColor, highlightUsedEndPoints);
+            entitySprite.paint(g, showEndPoints, showAddEndPoint, showRemoveEntity, selectedColor, showUsedEndPoints);
         }
 
         List<InteractionSprite> allInteractions = InteractionSprite.getInteractionSprites();
@@ -303,8 +303,13 @@ public class CanvasPanel extends JComponent {
         canvasChangeListener.showConnectionsOutwardsChanged(showConnectionsOutwards);
     }
 
-    public void highlightUsedEndPoints(boolean highlightUsedEndPoints) {
-        this.highlightUsedEndPoints = highlightUsedEndPoints;
+    public boolean getShowUsedEndPoints() {
+        return showUsedEndPoints;
+    }
+
+    public void setShowUsedEndPoints(boolean showUsedEndPoints) {
+        this.showUsedEndPoints = showUsedEndPoints;
+        canvasChangeListener.showUsedEndPoints(showUsedEndPoints);
     }
 
     public void addMouseModeChangeListener(MouseModeChangeListener listener) {
