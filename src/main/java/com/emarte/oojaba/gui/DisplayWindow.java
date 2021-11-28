@@ -73,15 +73,6 @@ public class DisplayWindow extends JFrame implements CanvasChangeListener {
         tallerMenuItem.setToolTipText("Make drawing area taller");
         canvasMenu.add(tallerMenuItem);
 
-        showGridMenuItem = new JCheckBoxMenuItem("G - Show Grid", true);
-        showGridMenuItem.addChangeListener(e -> {
-            canvasPanel.setShowGrid(showGridMenuItem.isSelected());
-            repaint();
-        });
-
-        showGridMenuItem.setToolTipText("Make grid lines in drawing area");
-        canvasMenu.add(showGridMenuItem);
-
         JMenuItem setSelectedColorItem = new JMenuItem("Set Selection / Connection Colour");
         setSelectedColorItem.addActionListener(e -> {
             COLOR_CHOOSER.setColor(canvasPanel.getSelectedColor());
@@ -103,11 +94,31 @@ public class DisplayWindow extends JFrame implements CanvasChangeListener {
         increaseTextSize.setToolTipText("Make drawing text larger");
         canvasMenu.add(increaseTextSize);
 
+        JMenuItem decreaseTextSizeItem = new JMenuItem("Decrease Text Size");
+        decreaseTextSizeItem.addActionListener(e -> {
+            canvasPanel.decreaseFontSize();
+            EntitySprite.ENTITY_BORDER_SIZE -= 5;
+            EntitySprite.ENDPOINT_BORDER_SIZE -= 1;
+            repaint();
+        });
+
+        decreaseTextSizeItem.setToolTipText("Make drawing text smaller");
+        canvasMenu.add(decreaseTextSizeItem);
+
         showConnectionsOutwardsItem = new JCheckBoxMenuItem("O -Show Connections Outwards", true);
         showConnectionsOutwardsItem.addChangeListener(e -> {
             canvasPanel.setShowConnectionsOutwards(showConnectionsOutwardsItem.isSelected());
             repaint();
         });
+
+        showGridMenuItem = new JCheckBoxMenuItem("G - Show Grid", true);
+        showGridMenuItem.addChangeListener(e -> {
+            canvasPanel.setShowGrid(showGridMenuItem.isSelected());
+            repaint();
+        });
+
+        showGridMenuItem.setToolTipText("Make grid lines in drawing area");
+        canvasMenu.add(showGridMenuItem);
 
         showConnectionsOutwardsItem.setToolTipText("Make drawing show connections made from the selected entity / endpoint outwards");
         canvasMenu.add(showConnectionsOutwardsItem);
@@ -120,17 +131,6 @@ public class DisplayWindow extends JFrame implements CanvasChangeListener {
 
         showUsedEndPointsItem.setToolTipText("Make drawing show which end points that have involved in service connections");
         canvasMenu.add(showUsedEndPointsItem);
-
-        JMenuItem decreaseTextSizeItem = new JMenuItem("Decrease Text Size");
-        decreaseTextSizeItem.addActionListener(e -> {
-            canvasPanel.decreaseFontSize();
-            EntitySprite.ENTITY_BORDER_SIZE -= 5;
-            EntitySprite.ENDPOINT_BORDER_SIZE -= 1;
-            repaint();
-        });
-
-        decreaseTextSizeItem.setToolTipText("Make drawing text smaller");
-        canvasMenu.add(decreaseTextSizeItem);
 
         JMenuItem moveAllDown = new JMenuItem("Move All Down");
         moveAllDown.addActionListener(e -> {

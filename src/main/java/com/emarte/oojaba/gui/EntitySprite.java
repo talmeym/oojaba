@@ -235,7 +235,7 @@ public class EntitySprite {
     void setAllEndPointsSelected() {
         endPointsSelected = new int[entity.getEndPoints().size()];
         AtomicInteger index = new AtomicInteger();
-        entity.getEndPoints().forEach(e -> {endPointsSelected[index.get()] = index.getAndIncrement();});
+        entity.getEndPoints().forEach(e -> endPointsSelected[index.get()] = index.getAndIncrement());
     }
 
     void setEndPointSelected(int index) {
