@@ -16,13 +16,16 @@ import static java.awt.event.KeyEvent.*;
 
 public class Oojaba {
     public static void main(String[] args) {
-        DisplayWindow window = new DisplayWindow();
+        File file = new File(FileUtils.FILENAME);
+
+        DisplayWindow window = new DisplayWindow(file);
+
         window.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 if(EntitySprite.getEntitySprites().size() > 0) {
                     if(JOptionPane.showConfirmDialog(window, "Save to disk before exiting ?", "Save entities.json ?", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE) == JOptionPane.OK_OPTION) {
-                        FileUtils.save(window.getCanvasPanel());
+                        FileUtils.save(window.getCanvasPanel(), file);
                     }
                 }
 
@@ -47,24 +50,6 @@ public class Oojaba {
                     case VK_G: canvasPanel.setShowGrid(!canvasPanel.getShowGrid()); break;
                     case VK_O: canvasPanel.setShowConnectionsOutwards(!canvasPanel.getShowConnectionsOutwards()); break;
                     case VK_U: canvasPanel.setShowUsedEndPoints(!canvasPanel.getShowUsedEndPoints()); break;
-                    case VK_L:
-                        if(new File(FileUtils.FILENAME_READ).exists()) {
-                            if (JOptionPane.showConfirmDialog(window, "Load from disk ?", "Load entities.json ?", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE) == JOptionPane.OK_OPTION) {
-                                FileUtils.load(canvasPanel);
-                            }
-                        } else {
-                            JOptionPane.showMessageDialog(canvasPanel, "Nothing on disk to load", "I got nothing", JOptionPane.INFORMATION_MESSAGE);
-                        }
-                        break;
-                    case VK_S:
-                        if(EntitySprite.getEntitySprites().size() > 0) {
-                            if (JOptionPane.showConfirmDialog(window, "Save to disk ?", "Save entities.json ?", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE) == JOptionPane.OK_OPTION) {
-                                FileUtils.save(canvasPanel);
-                            }
-                        } else {
-                            JOptionPane.showMessageDialog(canvasPanel, "Nothing on screen to save", "I got nothing", JOptionPane.INFORMATION_MESSAGE);
-                        }
-                        break;
                 }
 
                 window.repaint();

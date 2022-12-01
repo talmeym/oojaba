@@ -5,6 +5,7 @@ import com.emarte.oojaba.data.Interaction;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -16,7 +17,6 @@ import static java.awt.Color.black;
 import static java.awt.Color.white;
 
 public class CanvasPanel extends JComponent {
-
     private final Dimension canvasSize;
     private final CanvasChangeListener canvasChangeListener;
     private Font font;
@@ -35,7 +35,7 @@ public class CanvasPanel extends JComponent {
     private boolean showUsedEndPoints;
     private Color selectedColor = new Color(255, 154, 28);
 
-    CanvasPanel(Dimension startingSize, CanvasChangeListener canvasChangeListener) {
+    CanvasPanel(Dimension startingSize, CanvasChangeListener canvasChangeListener, File file) {
         this.canvasSize = startingSize;
         this.canvasChangeListener = canvasChangeListener;
         mouseModes.add(new PointerMouseMode(this));

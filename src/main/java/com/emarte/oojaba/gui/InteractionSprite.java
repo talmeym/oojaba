@@ -42,15 +42,17 @@ public class InteractionSprite {
     }
 
     private Point getFromPoint() {
-        EntitySprite fromSprite = forEntity(interactions.get(0).getActor().getEntity());
-        EntitySprite toSprite = forEntity(interactions.get(0).getDestination().getEntity());
-        return interactions.get(0).getType().isOutward() ? fromSprite.getExitPoint() : toSprite.getExitPoint();
+        Interaction interaction = interactions.get(0);
+        EntitySprite fromSprite = forEntity(interaction.getActor().getEntity());
+        EntitySprite toSprite = forEntity(interaction.getDestination().getEntity());
+        return interaction.getType().isOutward() ? fromSprite.getExitPoint() : toSprite.getExitPoint();
     }
 
     private Point getToPoint() {
-        EntitySprite fromSprite = forEntity(interactions.get(0).getActor().getEntity());
-        EntitySprite toSprite = forEntity(interactions.get(0).getDestination().getEntity());
-        return interactions.get(0).getType().isOutward() ? toSprite.getEntryPoint() : fromSprite.getEntryPoint();
+        Interaction interaction = interactions.get(0);
+        EntitySprite fromSprite = forEntity(interaction.getActor().getEntity());
+        EntitySprite toSprite = forEntity(interaction.getDestination().getEntity());
+        return interaction.getType().isOutward() ? toSprite.getEntryPoint() : fromSprite.getEntryPoint();
     }
 
     Point getHalfwayPoint(Point fromPoint, Point toPoint) {

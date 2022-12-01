@@ -80,7 +80,7 @@ public class Entity {
     public enum StandardAttributes {
         NAME("name");
 
-        private String value;
+        private final String value;
 
         StandardAttributes(String value) {
             this.value = value;

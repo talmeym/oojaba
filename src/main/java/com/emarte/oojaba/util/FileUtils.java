@@ -11,6 +11,7 @@ import com.emarte.oojaba.gui.InteractionSprite;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.awt.*;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -18,8 +19,7 @@ import java.util.List;
 import java.util.*;
 
 public class FileUtils {
-    public static final String FILENAME_READ = "entities.json";
-    public static final String FILENAME_WRITE = "entities.json";
+    public static final String FILENAME = "entities.json";
     public static final String ENTITY_SPRITES = "entitySprites";
     public static final String ENTITY = "entity";
     public static final String INTERACTION_SPRITES = "interactionSprites";
@@ -40,7 +40,7 @@ public class FileUtils {
     private static final String COLOR_RGB = "colorRgb";
     private static final String SELECTED_COLOR_RGB = "selectedColorRgb";
 
-    public static void save(CanvasPanel canvasPanel) {
+    public static void save(CanvasPanel canvasPanel, File file) {
         try {
             ObjectMapper mapper = new ObjectMapper();
             List<EntitySprite> entitySprites = EntitySprite.getEntitySprites();
@@ -50,20 +50,20 @@ public class FileUtils {
             map.put(ENTITY_BORDER, EntitySprite.ENTITY_BORDER_SIZE);
             map.put(ENDPOINT_BORDER, EntitySprite.ENDPOINT_BORDER_SIZE);
             map.put(SELECTED_COLOR_RGB, canvasPanel.getSelectedColor().getRGB());
-            mapper.writeValue(new FileOutputStream(FILENAME_WRITE), map);
+            mapper.writeValue(new FileOutputStream(file), map);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static void load(CanvasPanel canvasPanel) {
+    public static void load(CanvasPanel canvasPanel, File file) {
         Entity.getEntities().clear();
         Interaction.getInteractions().clear();
         Set<Point> allPointInstances = new HashSet<>();
 
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            Map map = objectMapper.readValue(new FileInputStream(FILENAME_READ), Map.class);
+            Map map = objectMapper.readValue(new FileInputStream(file), Map.class);
 
             canvasPanel.setFontSize((int) map.get(FONT_SIZE));
             EntitySprite.ENTITY_BORDER_SIZE = (int) map.get(ENTITY_BORDER);

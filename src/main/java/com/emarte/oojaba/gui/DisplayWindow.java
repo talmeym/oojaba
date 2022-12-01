@@ -16,42 +16,13 @@ public class DisplayWindow extends JFrame implements CanvasChangeListener {
     private final JCheckBoxMenuItem showConnectionsOutwardsItem;
     private final JCheckBoxMenuItem showUsedEndPointsItem;
 
-    public DisplayWindow() {
+    public DisplayWindow(File file) {
         super("Oojaba");
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        canvasPanel = new CanvasPanel(screenSize, this);
 
-        JMenuBar menuBar = new JMenuBar();
-        JMenu fileMenu = new JMenu("File");
+        canvasPanel = new CanvasPanel(screenSize, this, file);
 
-        JMenuItem loadItem = new JMenuItem("L - Load");
-        loadItem.addActionListener(e -> {
-            if (new File(FileUtils.FILENAME_READ).exists()) {
-                if (JOptionPane.showConfirmDialog(canvasPanel, "Load from disk ?", "Load entities.json ?", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE) == JOptionPane.OK_OPTION) {
-                    FileUtils.load(canvasPanel);
-                    canvasPanel.repaint();
-                }
-            } else {
-                JOptionPane.showMessageDialog(canvasPanel, "Nothing on disk to load", "I got nothing", JOptionPane.INFORMATION_MESSAGE);
-            }
-        });
-
-        loadItem.setToolTipText("Load from disk");
-        fileMenu.add(loadItem);
-
-        JMenuItem saveItem = new JMenuItem("S - Save");
-        saveItem.addActionListener(e -> {
-            if(EntitySprite.getEntitySprites().size() > 0) {
-                if (JOptionPane.showConfirmDialog(canvasPanel, "Save to disk ?", "Save entities.json ?", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE) == JOptionPane.OK_OPTION) {
-                    FileUtils.save(canvasPanel);
-                }
-            } else {
-                JOptionPane.showMessageDialog(canvasPanel, "Nothing on screen to save", "I got nothing", JOptionPane.INFORMATION_MESSAGE);
-            }
-        });
-
-        saveItem.setToolTipText("Save to disk");
-        fileMenu.add(saveItem);
+        FileUtils.load(canvasPanel, file);
 
         JMenu canvasMenu = new JMenu("Canvas");
 
@@ -184,7 +155,7 @@ public class DisplayWindow extends JFrame implements CanvasChangeListener {
 
         buttonGroup.setSelected(buttonGroup.getElements().nextElement().getModel(), true);
 
-        menuBar.add(fileMenu);
+        JMenuBar menuBar = new JMenuBar();
         menuBar.add(canvasMenu);
         menuBar.add(addMenu);
         menuBar.add(modeMenu);
